@@ -8,14 +8,53 @@
 	<h1>pubChat</h1>
 	<p>hope this works.</p>
 
+	<form id="send-message">
+		<label for="message">type message & hit enter</label>
+		<input type="text" name="message" />
+	</form>
+
+	<ul id="messages"></ul>
+
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io.connect('http://localhost');
-  socket.on('news', function (data) {
-    console.log(data);
-    socket.emit('my other event', { my: 'data' });
-  });
-</script>
+
+	/*** sockets and its events ***/
+	var socket = io.connect('http://localhost');
+	socket.on('connect',function() {
+		console.log('Client has connected to the server!');
+
+	});
+	socket.on('message',function(data) {
+		console.log('Received a message from the server!',data);
+	});
+	socket.on('disconnect',function() {
+		console.log('The client has disconnected!');
+	});
+
+	/*** form and its events ***/
+	var textInput = document.forms[0].message;
+
+	document.forms[0].onsubmit = function() {
+		return false;
+	};
+
+	textInput.onkeyup = function(e){
+		var key = e.keyCode;
+		if ( key != '13' ) {
+			return;
+		}
+		else {
+			console.log(this.value);
+			sendMessageToServer(this.value);
+		}
+	};
+
+	/*** functions ***/
+	function sendMessageToServer(message) {
+		socket.send(message);
+	}
+
+	</script>
 
 </body>
 </html>
