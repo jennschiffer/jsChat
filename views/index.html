@@ -69,6 +69,7 @@
 									+ ':</span> <span class="text">' + banter[i].text + '</span></li>';
 				}
 				messageContainer.innerHTML = banterHTML;
+				messageContainer.scrollTop = messageContainer.scrollHeight;
 			}
 			else {
 				console.log('nope');
