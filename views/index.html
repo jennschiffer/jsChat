@@ -1,60 +1,85 @@
 <!doctype html>
 <head>
 	<title>pubChat</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
 <body>
 
 	<h1>pubChat</h1>
-	<p>hope this works.</p>
+	<p>a websockets chat so simple a sportsball dev can use it</p>
 
 	<form id="send-message">
 		<label for="message">type message & hit enter</label>
 		<input type="text" name="message" />
 	</form>
 
-	<ul id="messages"></ul>
+	<ul id="pubChat-messages"></ul>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-
-	/*** sockets and its events ***/
-	var socket = io.connect('http://localhost');
-	socket.on('connect',function() {
-		console.log('Client has connected to the server!');
-
-	});
-	socket.on('message',function(data) {
-		console.log('Received a message from the server!',data);
-	});
-	socket.on('disconnect',function() {
-		console.log('The client has disconnected!');
-	});
-
-	/*** form and its events ***/
-	var textInput = document.forms[0].message;
-
-	document.forms[0].onsubmit = function() {
-		return false;
+	window.onload = function() {
+		
+		/*** pubchatroom and its events ***/
+		var messageContainer = document.getElementById('pubChat-messages');
+		var textInput = document.forms[0].message;
+		var banter = [];
+		
+		// TODO: let user submit nickname
+		var nickname = "jenn";
+		
+		// add keyup event					
+		textInput.onkeyup = function(e){
+			var key = e.keyCode;
+			var message = {
+				nick: nickname,
+			};
+			
+			if ( key != '13' ) {
+				return;
+			}
+			else {
+				message.text = this.value;
+				socket.emit('send', { chat: message });
+				this.value = "";
+			}
+		};
+		
+		// submit form event
+		document.forms[0].onsubmit = function() {
+			return false;
+		};
+		
+		
+		/*** sockets and its events ***/
+		var socket = io.connect('http://localhost:3000');
+		
+		socket.on('connect',function() {
+			console.log('wilkommen auf pubChat');
+		});
+		
+		socket.on('message',function(data) {
+			if ( data.chat ) {
+				banter.push(data.chat);
+				var banterHTML = '';
+				
+				for ( var i = 0; i < banter.length; i++ ) {
+					banterHTML += '<li><span class="nick">' + banter[i].nick 
+									+ ':</span> <span class="text">' + banter[i].text + '</span></li>';
+				}
+				messageContainer.innerHTML = banterHTML;
+			}
+			else {
+				console.log('nope');
+			}
+		});
+		
+		socket.on('disconnect',function() {
+			console.log('The client has disconnected!');
+		});
+		
 	};
-
-	textInput.onkeyup = function(e){
-		var key = e.keyCode;
-		if ( key != '13' ) {
-			return;
-		}
-		else {
-			console.log(this.value);
-			sendMessageToServer(this.value);
-		}
-	};
-
-	/*** functions ***/
-	function sendMessageToServer(message) {
-		socket.send(message);
-	}
-
-	</script>
+</script>
 
 </body>
 </html>

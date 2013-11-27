@@ -1,2 +1,4 @@
-body { padding: 20px; font: 14px monospace; }
+body { padding: 20px; font-family: monospace; }
 a { color: #333; }
+#pubChat-messages li { margin: 10px 0; }
+.nick { font-weight: bold; }
