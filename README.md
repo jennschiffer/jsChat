@@ -1,4 +1,4 @@
-pubChat
+jsChat
 =======
 
 simple sockets chat

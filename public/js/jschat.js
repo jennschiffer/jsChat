@@ -21,17 +21,17 @@ window.onload = function() {
 		/* TODO validate login */
 		nickname = loginForm.nickname.value;
 		password = loginForm.password.value;
-		pubChatAuthenticated();
+		jsChatAuthenticated();
 		return false;
 	}
 
-	var pubChatAuthenticated = function() {
+	var jsChatAuthenticated = function() {
 
 		loginForm.parentNode.removeChild(loginForm);
-		document.getElementById('pubchat').style.display = 'block';
+		document.getElementById('jsChat').style.display = 'block';
 
-		/*** pubchatroom and its events ***/
-		var messageContainer = document.getElementById('pubChat-messages');
+		/*** jsChatroom and its events ***/
+		var messageContainer = document.getElementById('jsChat-messages');
 		var textInput = document.forms[0].message;
 		var banter = [];
 
@@ -62,7 +62,7 @@ window.onload = function() {
 		var socket = io.connect('http://localhost:3000');
 		
 		socket.on('connect',function() {
-			console.log('wilkommen auf pubChat, ' + nickname);
+			console.log('wilkommen auf jsChat, ' + nickname);
 		});
 		
 		socket.on('message',function(data) {
