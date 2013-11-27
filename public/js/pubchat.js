@@ -8,6 +8,9 @@ window.onload = function() {
 	*	- log messages -> [time #color] name: message
 	*	- @nick alerts
 	*	- markdown support
+	*	- show when user leaves room
+	*	- show when chat has disconnected
+	*	- FIND A PLACE TO HOST THIS THING
 	*/
 	
 	var nickname, password;
