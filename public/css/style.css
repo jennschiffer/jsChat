@@ -1,5 +1,23 @@
 body { padding: 20px; font-family: monospace; }
 a { color: #333; }
-#pubChat-messages { height: 300px; overflow: scroll; border: 1px dashed #000; padding: 10px; }
+h1 { margin-top: 0; }
+
+#pubchat,
+#login { width: 100%; max-width: 600px; min-width: 225px; }
+#pubchat { display: none; }
+
+/* login form */
+#login { }
+#login label { display: block; font-weight: bold; }
+
+/* message window */
+#pubChat-messages { height: 300px; overflow-y: scroll; border: 1px dashed #000; padding: 10px; }
 #pubChat-messages li { margin: 10px 0; }
+
+/* message form*/
+#send-message { background: hotpink; padding: 5px; }
+#send-message label { display: block; }
+#send-message input { width: 98%; }
+
+/* messages */
 .nick { font-weight: bold; }
