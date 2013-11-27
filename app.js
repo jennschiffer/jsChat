@@ -15,7 +15,7 @@ app.get('/', function (req, res) {
 io.sockets.on('connection', function (socket) {
     
   socket.on('send', function (data) { 
-  	console.log(data);
+    var messages = [];
   	io.sockets.emit('message',data); 
   });
   
