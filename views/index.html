@@ -1,38 +1,22 @@
 <!doctype html>
 <head>
-	<title>jsChat</title>
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <title>jsChat</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
 <body>
 
-	<form id="login" action="">
-		<h1>log in to jsChat</h1>
-		
-		<p>
-			<label for="nick">nickname:</label>
-			<input type="text" name="nickname" />
-		</p>
-	
-		<p>
-			<label for="password">password:</label>
-			<input type="password" name="password" />
-		</p>
+    <div id="jsChat">
+        <h1>jsChat</h1>
+        <p>a websockets chat so simple a sportsball dev can use it. <a href="logoff">log off</a>.</p>
 
-		<input type="submit" value="submit" />
-	</form>
+        <ul id="jsChat-messages"></ul>
 
-	<div id="jsChat">
-		<h1>jsChat</h1>
-		<p>a websockets chat so simple a sportsball dev can use it</p>
-
-		<ul id="jsChat-messages"></ul>
-
-		<form id="send-message">
-			<label for="message">type message & hit enter</label>
-			<input type="text" name="message" />
-		</form>
-	</div>
+        <form id="send-message" action="">
+            <label for="message">type message & hit enter</label>
+            <input type="text" name="message" />
+        </form>
+    </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/jsChat.js"></script>
