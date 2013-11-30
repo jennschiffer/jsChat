@@ -3,6 +3,11 @@ jsChat
 
 a simple node/websockets chat
 
+### Features
+* requires login (sqlite3 database)
+* websockets real-time chat
+* very minimal design, as responsive as a cat when you're within 10 ft of its bag of food
+
 ### Install
 
 1. add files to some directory on your server [node must be installed](http://nodejs.org/download/).
