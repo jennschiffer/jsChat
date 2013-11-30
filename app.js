@@ -46,7 +46,6 @@ app.get('/logoff', function(req, resp) {
 
 // receive login post data
 app.post('/', function(req, resp) {
-
 	db.all('SELECT * FROM Users WHERE nickname="' + req.body.nickname + '" AND password="' + req.body.password + '"', 
 	  function(err, rows) {
 	  	        
@@ -77,10 +76,10 @@ server.listen(3000);
 io.sockets.on('connection', function (socket) {
   
     socket.on('send', function (data) { 
-        if ( data.chat ) {
-            // send messages 
+        if ( data.chat || data.activeUser ) {
+            // send messages or users
             io.sockets.emit('message',data);            
-        }
+        } 
     });
   
     socket.on('disconnect', function () { });
