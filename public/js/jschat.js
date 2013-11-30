@@ -1,17 +1,4 @@
 window.onload = function() {
-
-	/* TODO LIST 
-    *    - show when user leaves room
-    *    - list users in the room
-    *    - ability to change password
-    *    - log messages -> [time #color] name: message
-    *    - markdown support
-    *	 - commands
-    *	   * room topic
-    *      * links
-    *      * shortcodes
-    *    - FIND A PLACE TO HOST THIS THING
-    */
     
     var userInfo,
         messageContainer,

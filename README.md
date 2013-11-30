@@ -3,7 +3,7 @@ jsChat
 
 a simple node/websockets chat
 
-### install
+### Install
 
 1. add files to some directory on your server [node must be installed](http://nodejs.org/download/).
 
@@ -25,4 +25,14 @@ a simple node/websockets chat
 
 2. this has not been tested beyond my own machine
 
-3. if you have suggestions and tips, please PLEASE post an issue or reach out to me <jenn@pancaketheorem.com>. I'd love to get some insight and feedback from those of you who are experienced with these technologies
+3. if you have suggestions and tips, please PLEASE [post an issue](https://github.com/jennschiffer/jsChat/issues) or reach out to me <jenn@pancaketheorem.com>. I'd love to get some insight and feedback from those of you who are experienced with these technologies
+
+### To-do List
+
+* show when user leaves room
+* list users in the room
+* ability to change passwords
+* ability to register
+* log chat messages
+* markdown support
+* custom shortcodes
