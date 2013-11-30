@@ -7,7 +7,7 @@ a simple node/websockets chat
 
 1. add files to some directory on your server [node must be installed](http://nodejs.org/download/).
 
-2. install dependencies by running: <code>npm install</code> (dependencies: express, socket.io, sqlite3)
+2. go into the jschat directory and install dependencies by running: <code>npm install</code> (dependencies: express, socket.io, sqlite3)
 
 3. to start chat server, run <code>npm start</code>
 
