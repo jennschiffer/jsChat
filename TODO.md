@@ -9,6 +9,7 @@ These are items I'm working on or plan to work on. Feel free to submit a PR, but
 * room list
 * notify when user leaves
 * auto-replace "nick" with "poopface" on all messages
+* markdown support
 
 ## 2nd priority
 * /me
