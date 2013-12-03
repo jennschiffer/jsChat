@@ -28,6 +28,7 @@ app.use(express.bodyParser());
 app.use(express.cookieParser('my secret here'));
 app.use(express.static(__dirname + '/public'));
 
+
 // index
 app.get('/', function(req, resp) {
     resp.sendfile(__dirname + '/views/index.html');

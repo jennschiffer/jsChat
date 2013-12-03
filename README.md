@@ -16,7 +16,7 @@ a simple node/websockets chat
 
 3. to start chat server, run <code>npm start</code>
 
-4. direct your browser to <code>localhost:3000</code>
+4. direct your browser to <code>localhost:3000</code>. If you want to use something other than localhost, change it in <code>/public/js/jschat.js</code> and if you change the port number update in that and <code>/app.js</code>.
 
 ### Notes 
 
