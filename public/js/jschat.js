@@ -10,12 +10,6 @@ window.onload = function() {
 	    enteredTheRoom: 'has entered the room',
 	    disconnected: 'You have been disconnected.',
     };
-        
-    var system = {
-    	io: 'http://localhost:3000',
-        name: 'jschat',
-    	color: 'gray'
-    };
     	
     var loginForm = document.forms[0];
     
@@ -87,11 +81,11 @@ window.onload = function() {
         
         for ( var i = 0; i < banter.length; i++ ) {
         	if ( banter[i].nick == system.name ) {
-	        	banterHTML += '<li class="system"><span class="text">' + banter[i].text + '</span></li>';
+	        	banterHTML += '<li class="system"><span class="text">' + stripHTML(banter[i].text) + '</span></li>';
         	}
         	else {
-                banterHTML += '<li><span class="nick" style="color:' + banter[i].color + '">' + banter[i].nick 
-                            + ':</span> <span class="text">' + banter[i].text + '</span></li>';
+                banterHTML += '<li><span class="nick" style="color:' + stripHTML(banter[i].color) + '">' + stripHTML(banter[i].nick) 
+                            + ':</span> <span class="text">' + stripHTML(banter[i].text) + '</span></li>';
             }
         }
         messageContainer.innerHTML = banterHTML;
@@ -124,6 +118,10 @@ window.onload = function() {
         };
         socket.emit('send', { chat: message });
     };
+    
+	function stripHTML(html) {
+	    return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>?/gi, '');
+	}
     
     
     
