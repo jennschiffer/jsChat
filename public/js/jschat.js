@@ -1,6 +1,7 @@
 window.onload = function() {
     
     var userInfo,
+    	muteSwitch,
         messageContainer,
         textInput, 
         socket, 
@@ -9,10 +10,18 @@ window.onload = function() {
     var copy = {
 	    enteredTheRoom: 'has entered the room',
 	    disconnected: 'You have been disconnected.',
+	    mute: 'mute',
+	    unmute: 'unmute'
+    };
+    
+    var status = {
+	    mute: false
     };
     	
     var loginForm = document.forms[0];
-    
+    var favicon = document.getElementsByTagName('link')[1];
+    var alertSound = new Audio('/assets/alert.wav');
+
     /*** INIT SOCKETS AND CHAT ***/
 
     var initjsChat = function() {
@@ -21,6 +30,8 @@ window.onload = function() {
         document.getElementById('jsChat').style.display = 'block';
         messageContainer = document.getElementById('jsChat-messages');
         activeUsersList = document.getElementById('active-users');
+        muteSwitch = document.getElementById('mute-switch');
+        console.log(muteSwitch);
         textInput = document.forms[0].message;
         banter = [];
         activeUsers = [];
@@ -41,6 +52,21 @@ window.onload = function() {
         document.forms[0].onsubmit = function() {
             return false;
         };
+        
+        // mute event
+        muteSwitch.onclick = function(e) {
+        console.log('ok');
+	    	e.preventDefault();
+		    if ( this.innerText == copy.mute ) {
+			    this.innerText = copy.unmute;
+			    status.mute = true;
+		    }
+		    else {
+			    this.innerText = copy.mute;
+			    status.mute = false;
+		    }
+	    }
+
 
     };
     
@@ -62,6 +88,12 @@ window.onload = function() {
             if ( data.chat ) {
                 updateMessageWindow(data.chat);
             }
+            if ( status.blur ) {
+	            favicon.href = "/assets/alert.ico";
+	            if ( !status.mute ) {
+		            alertSound.play();
+	            }
+            }
         });
         
         socket.on('disconnect',function() {            
@@ -70,7 +102,15 @@ window.onload = function() {
         });
     };
     
-    
+    /*** alerts ***/
+	
+	window.onblur = function() {
+		status.blur = true;
+	}
+	window.onfocus = function() {
+		status.blur = false;
+		favicon.href = "/assets/jschat.ico";
+	}
     
     
     /*** HELPERS ***/
@@ -85,7 +125,7 @@ window.onload = function() {
         	}
         	else {
                 banterHTML += '<li><span class="nick" style="color:' + stripHTML(banter[i].color) + '">' + stripHTML(banter[i].nick) 
-                            + ':</span> <span class="text">' + stripHTML(banter[i].text) + '</span></li>';
+                            + ':</span> <span class="text">' + processMessageText( stripHTML(banter[i].text) ) + '</span></li>';
             }
         }
         messageContainer.innerHTML = banterHTML;
@@ -119,10 +159,25 @@ window.onload = function() {
         socket.emit('send', { chat: message });
     };
     
-	function stripHTML(html) {
+	var stripHTML = function(html) {
 	    return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>?/gi, '');
-	}
-    
+	};
+	
+	var processMessageText = function(messageText) {
+		
+	/*	// TODO: linkify
+		var i = 0;
+		while ( i != -1 ) {
+			i = messageText.indexOf('http://', i);
+			i = 
+		}
+		
+		// TODO: shortcodes
+	*/
+	
+		return messageText;
+		
+	};
     
     
     /*** INIT ***/
