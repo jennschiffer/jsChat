@@ -102,7 +102,7 @@ window.onload = function() {
 				}
 				
 				// print active users list
-				activeUsersList.innerText = '';
+				activeUsersList.innerHTML = '';
 				for ( var i = 0; i < activeUsers.length; i++) {
 					activeUsersList.innerHTML += '<li>' + activeUsers[i] + '</li>';
 				}
@@ -145,7 +145,7 @@ window.onload = function() {
         	}
         	else {
                 banterHTML += '<li><span class="nick" style="color:' + stripHTML(banter[i].color) + '">' + stripHTML(banter[i].nick) 
-                            + ':</span> <span class="text">' + processMessageText( stripHTML(banter[i].text) ) + '</span></li>';
+                            + ' (' + getTheTime(banter[i].timestamp) + '):</span> <span class="text">' + processMessageText( stripHTML(banter[i].text) ) + '</span></li>';
             }
         }
         messageContainer.innerHTML = banterHTML;
@@ -182,6 +182,24 @@ window.onload = function() {
 	var stripHTML = function(html) {
 	    return html.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>?/gi, '');
 	};
+	
+	var getTheTime = function(unix) {
+		var date = new Date(unix);
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		var amOrPm = "am";
+	
+		if ( hours >= 12 ) {
+			amOrPm = "pm";
+			if ( hours != 12 ) {
+				hours = hours - 12;
+			}
+		}
+		if ( hours == 0 ) {
+			hours = 12;
+		}
+		return hours + ':' + minutes + ' ' + amOrPm;
+	}
 	
 	var processMessageText = function(messageText) {
 		
