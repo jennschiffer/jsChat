@@ -71,17 +71,54 @@ app.post('/', function(req, resp) {
 /* socket.io */
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var connectedUsers = [];
 
 server.listen(3000);
 
 io.sockets.on('connection', function (socket) {
   
     socket.on('send', function (data) { 
-        if ( data.chat || data.activeUser ) {
+        if ( data.chat ) {
             // send messages or users
             io.sockets.emit('message',data);            
         } 
+        else if ( data.activeUser ) {
+	        connectedUsers.push({
+	        	nickname: data.activeUser,
+	        	clientID: socket.id
+	        });
+	        io.sockets.emit('message', { updateRoom: connectedUsers });
+        }
     });
   
-    socket.on('disconnect', function () { });
+    socket.on('disconnect', function (data) { 
+	   
+	   // remove user from room list
+	   var i = 0;
+	   var removalIndex;
+	   while ( i < connectedUsers.length ) {
+		   if ( connectedUsers[i].clientID == socket.id ) {
+			   removalIndex = i;
+			   i = connectedUsers.length + 1;
+		   }
+		   else {
+			   i++;
+		   }
+	   }
+	   
+	   var leaveMessage = {
+	   		nick: 'jschat',
+	        color: 'gray',
+	        text: connectedUsers[removalIndex] + ' has left the room',
+	        timestamp: Date.now()
+	   };
+	  
+	   // send message that user left
+	   io.sockets.emit('message',leaveMessage); 
+	   
+	   // send new user list
+	   connectedUsers.splice(removalIndex, 1);
+	   io.sockets.emit('message', { updateRoom: connectedUsers });
+	   
+    });
 });

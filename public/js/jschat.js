@@ -3,6 +3,7 @@ window.onload = function() {
     var userInfo,
     	muteSwitch,
         messageContainer,
+        activeUsers,
         textInput, 
         socket, 
         banter;
@@ -31,7 +32,6 @@ window.onload = function() {
         messageContainer = document.getElementById('jsChat-messages');
         activeUsersList = document.getElementById('active-users');
         muteSwitch = document.getElementById('mute-switch');
-        console.log(muteSwitch);
         textInput = document.forms[0].message;
         banter = [];
         activeUsers = [];
@@ -78,16 +78,36 @@ window.onload = function() {
         socket.on('connect',function() {
             initjsChat();
             
+            // send user to room list
+            socket.emit('send', { activeUser: userInfo.nickname });
+            
             // send message that userInfo.nickname has entered room
             system.message = userInfo.nickname + ' ' + copy.enteredTheRoom;
-            sendMessage(system.name, system.color, system.message);
-                      
+            sendMessage(system.name, system.color, system.message);          
         });
         
         socket.on('message',function(data) {
             if ( data.chat ) {
                 updateMessageWindow(data.chat);
-            }
+            } 
+            else if ( data.updateRoom ) {
+            	// get all users in array
+            	activeUsers = [];
+        		for (var key in data.updateRoom) {
+				   var obj = data.updateRoom[key];
+				   
+				   if ( activeUsers.indexOf(obj.nickname) == -1 ) {
+					   activeUsers.push(obj.nickname);
+				   }
+				}
+				
+				// print active users list
+				activeUsersList.innerText = '';
+				for ( var i = 0; i < activeUsers.length; i++) {
+					activeUsersList.innerHTML += '<li>' + activeUsers[i] + '</li>';
+				}
+			}	
+				    
             if ( status.blur ) {
 	            favicon.href = "/assets/alert.ico";
 	            if ( !status.mute ) {

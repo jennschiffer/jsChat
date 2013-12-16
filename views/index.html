@@ -14,8 +14,13 @@
         
         <form id="send-message" action="">
             <label for="message">type message & hit enter</label>
-            <input type="text" name="message" />
+            <textarea  type="text" name="message"></textarea>
         </form>
+        
+        <div id="room-info">
+        	in the room: 
+        	<ul id="active-users"></ul>
+        </div>
     </div>
 
 <script src="/socket.io/socket.io.js"></script>

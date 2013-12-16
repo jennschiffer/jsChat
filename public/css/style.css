@@ -1,3 +1,4 @@
+* { box-sizing: border-box; }
 body { padding: 20px; font-family: monospace; }
 a { color: #333; }
 h1 { margin-top: 0; }
@@ -16,13 +17,13 @@ h1 { margin-top: 0; }
 #jsChat-messages li.system { font-style: italic; color: #999; }
 
 /* active users list */
-#active-users { margin: 0 0 10px; padding: 0; list-style: none; }
-#active-users li { display: inline-block; margin: auto 5px; font-weight: bold; }
+#active-users { margin: 10px 0; padding: 0; list-style: none; display: inline-block; }
+#active-users li { display: inline-block; margin: auto 5px; font-weight: bold; padding: 2px 5px; background: #efefef; }
 
 /* message form*/
 #send-message { background: #0167CC; padding: 5px; color: #fff;}
 #send-message label { display: block; }
-#send-message input { width: 98%; }
+#send-message textarea { width: 100%; margin: 10px 0 0; }
 
 /* messages */
 .nick { font-weight: bold; }
