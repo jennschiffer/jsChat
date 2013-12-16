@@ -34,10 +34,4 @@ a simple node/websockets chat
 
 ### To-do List
 
-* show when user leaves room
-* list users in the room
-* ability to change passwords
-* ability to register
-* log chat messages
-* markdown support
-* custom shortcodes
+see TODO.md

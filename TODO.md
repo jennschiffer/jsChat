@@ -5,6 +5,7 @@ These are items I'm working on or plan to work on. Feel free to submit a PR, but
 ## priority
 * formatting support (links, italics, bold)
 * auto-replace "nick" with "poopface" on all messages
+* user management
 
 ## 2nd priority
 * /me
