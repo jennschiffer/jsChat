@@ -124,10 +124,10 @@ window.onload = function() {
     
     /*** alerts ***/
 	
-	window.onblur = function() {
+	document.onblur = function() {
 		status.blur = true;
 	}
-	window.onfocus = function() {
+	document.onfocus = function() {
 		status.blur = false;
 		favicon.href = "/assets/jschat.ico";
 	}
@@ -139,16 +139,15 @@ window.onload = function() {
         banter.push(chatData);
         var banterHTML = '';
         
-        for ( var i = 0; i < banter.length; i++ ) {
-        	if ( banter[i].nick == system.name ) {
-	        	banterHTML += '<li class="system"><span class="text">' + stripHTML(banter[i].text) + '</span></li>';
-        	}
-        	else {
-                banterHTML += '<li><span class="nick" style="color:' + stripHTML(banter[i].color) + '">' + stripHTML(banter[i].nick) 
-                            + ' (' + getTheTime(banter[i].timestamp) + '):</span> <span class="text">' + processMessageText( stripHTML(banter[i].text) ) + '</span></li>';
-            }
+        if ( chatData.nick == system.name ) {
+	        banterHTML += '<li class="system"><span class="text">' + stripHTML(chatData.text) + '</span></li>';
+    	}
+    	else {
+            banterHTML += '<li><span class="nick" style="color:' + stripHTML(chatData.color) + '">' + stripHTML(chatData.nick) 
+                        + ' (' + getTheTime(chatData.timestamp) + '):</span> <span class="text">' 
+                        + stripHTML(chatData.text) + '</span></li>';
         }
-        messageContainer.innerHTML = banterHTML;
+        messageContainer.innerHTML += banterHTML;
         messageContainer.scrollTop = messageContainer.scrollHeight;
     };
     
@@ -204,22 +203,6 @@ window.onload = function() {
 		}
 		return hours + ':' + minutes + ' ' + amOrPm;
 	}
-	
-	var processMessageText = function(messageText) {
-		
-	/*	// TODO: linkify
-		var i = 0;
-		while ( i != -1 ) {
-			i = messageText.indexOf('http://', i);
-			i = 
-		}
-		
-		// TODO: shortcodes
-	*/
-	
-		return messageText;
-		
-	};
     
     
     /*** INIT ***/
