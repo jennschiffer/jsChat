@@ -55,14 +55,13 @@ window.onload = function() {
         
         // mute event
         muteSwitch.onclick = function(e) {
-        console.log('ok');
 	    	e.preventDefault();
-		    if ( this.innerText == copy.mute ) {
-			    this.innerText = copy.unmute;
+		    if ( this.innerHTML == copy.mute ) {
+			    this.innerHTML = copy.unmute;
 			    status.mute = true;
 		    }
 		    else {
-			    this.innerText = copy.mute;
+			    this.innerHTML = copy.mute;
 			    status.mute = false;
 		    }
 	    }
@@ -117,7 +116,7 @@ window.onload = function() {
         });
         
         socket.on('disconnect',function() {            
-            document.forms[0].getElementsByTagName('label')[0].innerText = copy.disconnected;
+            document.forms[0].getElementsByTagName('label')[0].innerHTML = copy.disconnected;
             textInput.style.display = 'none';            
         });
     };
@@ -140,12 +139,12 @@ window.onload = function() {
         var banterHTML = '';
         
         if ( chatData.nick == system.name ) {
-	        banterHTML += '<li class="system"><span class="text">' + stripHTML(chatData.text) + '</span></li>';
+	        banterHTML += '<li class="system"><span class="text">' + processMessage(chatData.text) + '</span></li>';
     	}
     	else {
             banterHTML += '<li><span class="nick" style="color:' + stripHTML(chatData.color) + '">' + stripHTML(chatData.nick) 
                         + ' (' + getTheTime(chatData.timestamp) + '):</span> <span class="text">' 
-                        + stripHTML(chatData.text) + '</span></li>';
+                        + processMessage(chatData.text) + '</span></li>';
         }
         messageContainer.innerHTML += banterHTML;
         messageContainer.scrollTop = messageContainer.scrollHeight;
@@ -204,6 +203,9 @@ window.onload = function() {
 		return hours + ':' + minutes + ' ' + amOrPm;
 	}
     
+    var processMessage = function(message) {
+	    return stripHTML(message);
+    };
     
     /*** INIT ***/
     

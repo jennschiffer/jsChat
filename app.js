@@ -109,12 +109,12 @@ io.sockets.on('connection', function (socket) {
 	   var leaveMessage = {
 	   		nick: 'jschat',
 	        color: 'gray',
-	        text: connectedUsers[removalIndex] + ' has left the room',
+	        text: connectedUsers[removalIndex].nickname + ' has left the room',
 	        timestamp: Date.now()
 	   };
 	  
 	   // send message that user left
-	   io.sockets.emit('message',leaveMessage); 
+	   io.sockets.emit('message', { chat: leaveMessage }); 
 	   
 	   // send new user list
 	   connectedUsers.splice(removalIndex, 1);

@@ -1,17 +1,17 @@
 a jsChat Feature To-do list
 ---
-These are items I'm working on or plan to work on. Feel free to submit a PR, but I suggest contacting me first just in case I've done it already and you don't want to waste your time on a PR that won't be merged :D
+These are items I'm working on or plan to work on. Feel free to submit a PR, but I suggest contacting me first just in case I've done it already and you don't want to waste your time on a PR that won't be merged wowowow
 
 ## priority
-* formatting support (links, italics, bold)
-* auto-replace "nick" with "poopface" on all messages
-* user management
+* more secure passwords (currently plaintext - groﬂﬂ)
+* formatting (links, italics, bold)
+* user info/pswd management
 
 ## 2nd priority
 * /me
 * @user
-* whisper
-* shortcodes
+* !user whisper
+* shortcodes (like automagic Jira links)
 
 ## lowest priority
-* auto-replace "poopface" with "nick" on all messages
+* auto-replace "nick" with "jerkhead" on all messages
