@@ -15,17 +15,19 @@
         <form id="send-message" action="">
             <label for="message">type message & hit enter</label>
             <textarea  type="text" name="message"></textarea>
+            <select id="faces"></select>
         </form>
         
         <div id="room-info">
-        	in the room: 
-        	<ul id="active-users"></ul>
+            in the room: 
+            <ul id="active-users"></ul>
         </div>
     </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/config.js"></script>
 <script src="/js/jschat.js"></script>
+<script src="/js/faces.js"></script>
 
 </body>
 </html>
