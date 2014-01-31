@@ -204,6 +204,12 @@ window.onload = function() {
 	}
     
     var processMessage = function(message) {
+
+        // Check for image on every message because reasons
+        if (message.match(/^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^/#?]+)+\.(?:jpg|gif|png)/) ) {
+            return '<a href="' + message + '"><img width="200px" src="' + message + '"></a>';
+        }
+
 	    return stripHTML(message);
     };
     
