@@ -24,25 +24,28 @@ db.serialize(function(){
 var express = require('express');
 var app = express();
 
-app.use(express.bodyParser());
-app.use(express.cookieParser('my secret here'));
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
 
 // index
 app.get('/', function(req, resp) {
-    resp.sendfile(__dirname + '/views/index.html');
+    resp.sendFile(__dirname + '/views/index.html');
 });
 
 // log in
 app.get('/login', function(req, resp) {
-	resp.sendfile(__dirname + '/views/login.html');
+	resp.sendFile(__dirname + '/views/login.html');
 });
 
 // log off
 app.get('/logoff', function(req, resp) {
 	resp.clearCookie('jschat');
-	resp.sendfile(__dirname + '/views/login.html');
+	resp.sendFile(__dirname + '/views/login.html');
 });
 
 // receive login post data
@@ -62,7 +65,7 @@ app.post('/', function(req, resp) {
         } else {
 	        resp.clearCookie('jschat');
         }
-        resp.sendfile(__dirname + '/views/index.html');
+        resp.sendFile(__dirname + '/views/index.html');
    });
 });
 
